@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Login - MSME Digital Marketplace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .background-pattern {
+            background-image:
+                radial-gradient(circle at 100% 0%, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0) 20%),
+                radial-gradient(circle at 0% 100%, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0) 20%);
+            background-color: #f0fdf4; /* A very light green from Tailwind's green-50 */
+        }
+    </style>
+</head>
+<body class="background-pattern">
+
+    <div class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8">
+        <header class="text-center mb-10">
+            <a href="index.html" class="text-2xl font-bold text-green-800">MSME Digital Marketplace</a>
+            <h1 class="mt-4 text-3xl sm:text-4xl font-extrabold text-green-900 tracking-tight">Choose Your Login</h1>
+            <p class="mt-2 text-lg text-green-700">Please select your account type to continue.</p>
+        </header>
+
+        <main class="w-full max-w-2xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <!-- Admin & Retailer Selection Card -->
+                <a href="/views/loginadmin" class="group block bg-white p-8 rounded-xl shadow-lg border border-gray-200/50 hover:border-green-500 hover:shadow-2xl transition-all duration-300 text-center">
+                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-green-100 border border-green-200 mb-4 mx-auto group-hover:bg-green-200 transition-colors">
+                        <!-- Briefcase Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-700"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-green-900"  >Admin / Retailer</h2>
+                    <p class="mt-2 text-green-700">Access the merchant dashboard and manage products.</p>
+                </a>
+
+                <!-- User Selection Card -->
+                <a href="/views/loginuser" class="group block bg-white p-8 rounded-xl shadow-lg border border-gray-200/50 hover:border-green-500 hover:shadow-2xl transition-all duration-300 text-center">
+                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-green-100 border border-green-200 mb-4 mx-auto group-hover:bg-green-200 transition-colors">
+                        <!-- User Icon -->
+                       <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-700"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-green-900">User</h2>
+                    <p class="mt-2 text-green-700">Shop for products and manage your account.</p>
+                </a>
+
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>
+

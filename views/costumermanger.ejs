@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <title>Customer Management</title>
+  <link rel="stylesheet" href="customer.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
+  font-family: 'Inter', sans-serif; 
+}
+
+body {
+  background-color: #f4f4f7; 
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px; 
+}
+
+
+
+.hd {
+  padding: 16px 0 20px 0; 
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end; 
+}
+
+.hd h1 {
+    font-size: 24px; 
+    margin-bottom: 2px;
+    font-weight: 600;
+}
+
+.hd span {
+    color: #6c757d; 
+    font-size: 14px;
+}
+
+
+.btn-primary {
+  text-decoration: none;
+  color: white;
+  padding: 8px 12px;
+  background-color: #5d5cff;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap; 
+  display: flex; 
+  align-items: center;
+}
+
+
+.search-filter {
+    margin-bottom: 20px;
+}
+
+.search-input-wrapper {
+    position: relative;
+}
+
+.search-input-wrapper input {
+    width: 100%; 
+    padding: 10px 15px 10px 40px;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+
+.search-input-wrapper::before {
+    content: '🔎'; 
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #adb5bd;
+    font-size: 14px;
+}
+
+
+.customer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; }
+
+.customer-row {
+    background-color: white;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: box-shadow 0.2s;
+}
+
+.customer-row:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+
+
+.customer-info {
+    display: flex;
+    align-items: center;
+    flex-basis: 350px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+
+.bg-pink { background-color: #e5538e; }
+.bg-purple { background-color: #8c52ff; }
+.bg-blue { background-color: #5d5cff; }
+.bg-teal { background-color: #20c997; }
+
+.details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.name-status {
+    display: flex;
+    align-items: center;
+}
+
+.name {
+    font-weight: 500;
+    font-size: 16px;
+    color: #212529;
+    margin-right: 8px;
+}
+
+
+.status {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.status-active {
+    background-color: #e0f7e9; 
+    color: #28a745;  
+}
+
+.status-inactive {
+    background-color: #f7e0e0; 
+    color: #dc3545; 
+}
+
+.contact-info {
+    font-size: 12px;
+    color: #6c757d;
+}
+
+.contact-info .email {
+    margin-right: 10px;
+}
+
+
+
+.stats-data {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    padding: 0 20px;
+    flex-basis: 120px; 
+}
+
+.stats-data .value {
+    font-weight: 600;
+    font-size: 16px;
+    color: #212529;
+}
+
+.stats-data .value-highlight {
+    font-weight: 600;
+    font-size: 16px;
+    color: #5d5cff;
+}
+
+.stats-data .label {
+    font-size: 12px;
+    color: #6c757d;
+}
+
+
+.last-order {
+    text-align: left;
+    flex-basis: 100px;
+}
+.last-order .value {
+    font-weight: 500; 
+}
+
+  
+
+.actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.action-btn {
+    background-color: white;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 8px;
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #6c757d; 
+}
+
+.action-btn:hover {
+    background-color: #f8f9fa;
+}
+    </style>
+  </head>
+<body>
+  <div class="container">
+    <div class="hd">
+      <div>
+        <h1>Customer Management</h1>
+        <span>Manage your customer relationships</span>
+      </div>
+      <a href="#" class="btn btn-primary">
+        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="height: 0.8em; margin-right: 4px; fill: currentColor;"><path d="M416 208H240V32c0-17.67-14.33-32-32-32s-32 14.33-32 32v176H32c-17.67 0-32 14.33-32 32s14.33 32 32 32h176v176c0 17.67 14.33 32 32 32s32-14.33 32-32V272h176c17.67 0 32-14.33 32-32s-14.33-32-32-32z"></path></svg>
+        Add Customer
+      </a>
+    </div>
+    
+    <div class="search-filter">
+        <div class="search-input-wrapper"> 
+            <input type="text" placeholder="Search customers...">
+        </div>
+    </div>
+    
+    <div class="customer-list">
+      
+      <div class="customer-row">
+        <div class="customer-info">
+          <div class="avatar bg-pink">RK</div>
+          <div class="details">
+            <div class="name-status">
+              <span class="name">Rajesh Kumar</span>
+              <span class="status status-active">active</span>
+            </div>
+            <div class="contact-info">
+              <span class="email">rajesh.k@email.com</span>
+              <span class="phone">+91 98765 43210</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="stats-data orders">
+            <span class="value">12</span>
+            <span class="label">Orders</span>
+        </div>
+        
+        <div class="stats-data total-spent">
+            <span class="value-highlight">₹15,420</span>
+            <span class="label">Total Spent</span>
+        </div>
+        
+        <div class="stats-data last-order">
+            <span class="value">2 days</span>
+            <span class="label">ago</span>
+        </div>
+        
+        <div class="actions">
+            <button class="action-btn email-btn">✉</button>
+            <button class="action-btn message-btn">💬</button>
+        </div>
+      </div>
+      
+      <div class="customer-row">
+        <div class="customer-info">
+          <div class="avatar bg-purple">PS</div>
+          <div class="details">
+            <div class="name-status">
+              <span class="name">Priya Sharma</span>
+              <span class="status status-active">active</span>
+            </div>
+            <div class="contact-info">
+              <span class="email">priya.s@email.com</span>
+              <span class="phone">+91 98765 43211</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="stats-data orders">
+            <span class="value">8</span>
+            <span class="label">Orders</span>
+        </div>
+        
+        <div class="stats-data total-spent">
+            <span class="value-highlight">₹9,850</span>
+            <span class="label">Total Spent</span>
+        </div>
+        
+        <div class="stats-data last-order">
+            <span class="value">1 week</span>
+            <span class="label">ago</span>
+        </div>
+        
+        <div class="actions">
+            <button class="action-btn email-btn">✉</button>
+            <button class="action-btn message-btn">💬</button>
+        </div>
+      </div>
+      
+      <div class="customer-row">
+        <div class="customer-info">
+          <div class="avatar bg-blue">AP</div>
+          <div class="details">
+            <div class="name-status">
+              <span class="name">Amit Patel</span>
+              <span class="status status-inactive">inactive</span>
+            </div>
+            <div class="contact-info">
+              <span class="email">amit.p@email.com</span>
+              <span class="phone">+91 98765 43212</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="stats-data orders">
+            <span class="value">5</span>
+            <span class="label">Orders</span>
+        </div>
+        
+        <div class="stats-data total-spent">
+            <span class="value-highlight">₹6,720</span>
+            <span class="label">Total Spent</span>
+        </div>
+        
+        <div class="stats-data last-order">
+            <span class="value">3 weeks</span>
+            <span class="label">ago</span>
+        </div>
+        
+        <div class="actions">
+            <button class="action-btn email-btn">✉</button>
+            <button class="action-btn message-btn">💬</button>
+        </div>
+      </div>
+      
+      <div class="customer-row">
+        <div class="customer-info">
+          <div class="avatar bg-teal">SR</div>
+          <div class="details">
+            <div class="name-status">
+              <span class="name">Sneha Reddy</span>
+              <span class="status status-active">active</span>
+            </div>
+            <div class="contact-info">
+              <span class="email">sneha.r@email.com</span>
+              <span class="phone">+91 98765 43213</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="stats-data orders">
+            <span class="value">15</span>
+            <span class="label">Orders</span>
+        </div>
+        
+        <div class="stats-data total-spent">
+            <span class="value-highlight">₹22,340</span>
+            <span class="label">Total Spent</span>
+        </div>
+        
+        <div class="stats-data last-order">
+            <span class="value">Yesterday</span>
+            <span class="label">Last Order</span>
+        </div>
+        
+        <div class="actions">
+            <button class="action-btn email-btn">✉</button>
+            <button class="action-btn message-btn">💬</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</body>
+   </html>
