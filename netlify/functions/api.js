@@ -93,7 +93,8 @@ router.get('/jewelry', (req, res) => {
 // --- End of Routes ---
 
 // All routes will be prefixed with /.netlify/functions/api
-app.use('/.netlify/functions/api', router);
+app.use('/', router);
 
 // Export the handler for Netlify
+
 module.exports.handler = serverless(app);
