@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <title>Inventory Management</title>
+  <link rel="stylesheet" href="inventory.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
+  font-family: 'Inter', sans-serif; 
+}
+
+body {
+  background-color: #f4f4f7; 
+  padding: 40px 0; 
+}
+
+.container {
+  max-width: 1000px; 
+  margin: 0 auto;
+  padding: 0 16px; 
+}
+
+
+.hd {
+  padding: 0 0 20px 0; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+}
+
+.hd h1 {
+    font-size: 24px; 
+    margin-bottom: 2px;
+    font-weight: 600;
+    color: #212529;
+}
+
+.hd span {
+    color: #6c757d; 
+    font-size: 14px;
+}
+
+.btn {
+  text-decoration: none;
+  color: white;
+  padding: 8px 16px;
+  background-color: #5d5cff; 
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap; 
+  display: flex; 
+  align-items: center;
+  gap: 8px; 
+}
+
+.btn-icon {
+    width: 16px;
+    height: 16px;
+    
+}
+
+
+.metrics-cards {
+  display: flex;
+  gap: 16px; 
+  margin-bottom: 30px;
+}
+
+.box {
+  background-color: white;
+  border-radius: 8px; 
+  padding: 20px;
+  width: calc(33.333% - 10.666px); 
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); 
+  margin: 25px; 
+}
+
+.box-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.box-header span {
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.box h1 {
+    font-size: 30px; 
+    font-weight: 600;
+    color: #212529;
+}
+
+.box-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px; 
+}
+
+
+.box1 .box-icon { 
+    background-color: #e9f7ee;
+    color: #28a745;
+}
+
+.box2 .box-icon { 
+    background-color: #f1f0ff;
+    color: #5d5cff;
+}
+
+.box3 .box-icon { 
+    background-color: #fcebeb;
+    color: #dc3545;
+}
+
+
+
+.inventory-table-container {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.inventory-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.inventory-table th,
+.inventory-table td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.inventory-table th {
+    font-weight: 500;
+    color: #6c757d;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.inventory-table tr:last-child td {
+    border-bottom: none; 
+}
+
+.product-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+}
+
+.product-icon {
+    width: 30px;
+    height: 30px;
+    background-color: #f1f0ff; 
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #5d5cff;
+    font-size: 16px;
+}
+
+.product-details div:last-child {
+    font-size: 13px;
+    color: #6c757d;
+    margin-top: 2px;
+}
+
+
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 12px;
+    text-align: center;
+}
+
+.status-normal {
+    background-color: #e9ecef;
+    color: #495057;
+}
+
+.status-low {
+    background-color: #f1f0ff;
+    color: #5d5cff;
+}
+
+.status-critical {
+    background-color: #fcebeb;
+    color: #dc3545;
+}
+
+.status-healthy {
+    background-color: #e9f7ee;
+    color: #28a745;
+}
+
+.action-btn {
+    text-decoration: none;
+    padding: 6px 10px;
+    background-color: #f1f0ff;
+    color: #5d5cff;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    border: 1px solid #5d5cff;
+}
+
+</style>
+
+<body>
+    <div class="container">
+      
+      <div class="hd">
+        <div>
+          <h1>Inventory Management</h1>
+          <span>Track and manage your stock levels</span>
+        </div>
+        <a href="----" class="btn">
+          <span class="btn-icon">📦</span>
+          Restock Items
+        </a>
+      </div>
+      
+      <div class="metrics-cards">
+      
+        <div class="box box1">
+          <div class="box-header">
+            <div class="box-icon">📈</div>
+            <span>Healthy Stock</span>
+          </div>
+          <h1>24</h1>
+        </div>
+        
+        <div class="box box2">
+          <div class="box-header">
+            <div class="box-icon">📉</div>
+            <span>Low Stock</span>
+          </div>
+          <h1>8</h1>
+        </div>
+        
+        <div class="box box3">
+          <div class="box-header">
+            <div class="box-icon">⚠</div>
+            <span>Out of Stock</span>
+          </div>
+          <h1>3</h1>
+        </div>
+        
+      </div>
+      
+      <div class="inventory-table-container">
+        <table class="inventory-table">
+          <thead>
+            <tr>
+              <th style="width: 25%;">Product</th>
+              <th style="width: 15%;">SKU</th>
+              <th style="width: 15%;">Quantity</th>
+              <th style="width: 15%;">Min. Stock</th>
+              <th style =" width:15 ">Last Restocked</th>
+              <th style="width: 10%;">Status</th>
+              <th style="width: 5%;">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="product-cell">
+                  <div class="product-icon">☕</div>
+                  <div class="product-details">
+                    <div>Premium Tea Packets</div>
+                  </div>
+                </div>
+              </td>
+              <td>TEA-001</td>
+              <td><strong>45 units</strong></td>
+              <td>50 units</td>
+              <td>2 days ago</td>
+              <td><span class="status-badge status-normal">Normal</span></td>
+              <td><a href="----" class="action-btn">Restock</a></td>
+            </tr>
+            
+            <tr>
+              <td>
+                <div class="product-cell">
+                  <div class="product-icon">🍚</div>
+                  <div class="product-details">
+                    <div>Organic Rice</div>
+                    <div>(5kg)</div>
+                  </div>
+                </div>
+              </td>
+              <td>RICE-005</td>
+              <td><strong>23 units</strong></td>
+              <td>30 units</td>
+              <td>1 week ago</td>
+              <td><span class="status-badge status-low">Low</span></td>
+              <td><a href="----" class="action-btn">Restock</a></td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="product-cell">
+                  <div class="product-icon">💧</div>
+                  <div class="product-details">
+                    <div>Cooking Oil</div>
+                    <div>(1L)</div>
+                  </div>
+                </div>
+              </td>
+              <td>OIL-001</td>
+              <td><strong>8 units</strong></td>
+              <td>40 units</td>
+              <td>3 days ago</td>
+              <td><span class="status-badge status-critical">Critical</span></td>
+              <td><a href="----" class="action-btn">Restock</a></td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="product-cell">
+                  <div class="product-icon">🌾</div>
+                  <div class="product-details">
+                    <div>Wheat Flour<div>
+                    <div>(10kg)</div>
+                  </div>
+                </div>
+              </td>
+              <td>FLOUR-010</td>
+              <td><strong>67 units</strong></td>
+              <td>50 units</td>
+              <td>Today</td>
+              <td><span class="status-badge status-healthy">Healthy</span></td>
+              <td><a href="----" class="action-btn">Restock</a></td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+      
+    </div> 
+</body>
+</html>
