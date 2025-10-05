@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings</title>
+  <link rel="stylesheet" href="setting.css">
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
+  font-family: sans-serif; 
+}
+
+:root {
+  --primary-color: #5b55e3; 
+  --text-dark: #333;
+  --text-medium: #666;
+  --text-light: #999;
+  --border-color: #ddd;
+  --bg-light: #f4f4f4;
+  --card-bg: #fff;
+  --toggle-off: #ccc;
+  --toggle-on: #007bff;
+}
+
+body {
+  background-color: var(--bg-light); 
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 800px; 
+  padding: 0 20px;
+}
+
+
+.header {
+  margin: 40px 0 20px 0;
+}
+
+.header h1 {
+  color: var(--text-dark);
+  font-size: 28px;
+  margin-bottom: 5px;
+}
+
+.header span {
+  color: var(--text-medium);
+  font-size: 16px;
+}
+
+
+.card {
+  background-color: var(--card-bg); 
+  padding: 30px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border-color); 
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); 
+}
+
+.card h2 {
+  font-size: 20px;
+  color: var(--text-dark);
+  margin-bottom: 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+
+.card h2::before {
+  content: '👤'; 
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.business-info h2::before { content: '🏢'; }
+.notifications h2::before { content: '🔔'; }
+.lang-region h2::before { content: '🌐'; }
+.security h2::before { content: '🔒'; }
+
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: var(--text-medium);
+  font-size: 14px;
+}
+
+input[type="text"], 
+input[type="email"], 
+input[type="tel"],
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  font-size: 16px;
+  color: var(--text-dark);
+}
+
+input[readonly] {
+    background-color: var(--bg-light);
+}
+
+
+.form-group.row {
+  display: flex;
+  gap: 20px;
+}
+
+.input-col {
+  flex: 1;
+}
+
+
+.btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.primary-btn {
+  background-color: var(--primary-color); 
+  color: white;
+  margin-top: 20px;
+  width: auto;
+  padding: 10px 25px;
+}
+
+.secondary-btn {
+  background-color: var(--primary-color); 
+  color: white;
+  margin-top: 20px;
+  width: auto;
+  padding: 10px 25px;
+}
+
+.link-btn {
+  background: none;
+  color: var(--primary-color);
+  padding: 0;
+  margin-right: 30px;
+}
+
+.primary-btn:hover, .secondary-btn:hover {
+  filter: brightness(1.1);
+}
+
+
+.toggle-setting {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.toggle-setting:last-child {
+  border-bottom: none;
+}
+
+.toggle-setting label {
+  font-weight: 500;
+  color: var(--text-dark);
+  font-size: 16px;
+  margin-bottom: 2px;
+}
+
+.toggle-setting p {
+  color: var(--text-medium);
+  font-size: 13px;
+}
+
+.switch {
+  appearance: none;
+  position: relative;
+  width: 45px; 
+  height: 25px;
+  background: var(--toggle-off);
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.3s;
+  outline: none;
+  margin: 0; 
+}
+
+.switch:checked {
+  background: var(--toggle-on);
+}
+
+.switch::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;
+  top: 2.5px;
+  left: 2.5px;
+  transition: transform 0.3s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.switch:checked::before {
+  transform: translateX(20px);
+}
+
+
+.security-options {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.security-options .link-btn {
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    color: var(--text-dark);
+    font-weight: normal;
+    transition: background-color 0.2s;
+}
+
+.security-options .link-btn:hover {
+    background-color: var(--bg-light);
+}
+
+
+@media (max-width: 600px) {
+  body {
+    background-color: var(--card-bg);
+  }
+
+  .container {
+    padding: 0 15px;
+  }
+
+  .card {
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 20px 0;
+    margin-bottom: 10px;
+  }
+  
+  .header {
+    margin: 20px 0 10px 0;
+  }
+
+  
+  .form-group.row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .primary-btn, .secondary-btn {
+      width: 100%; 
+      margin-top: 30px;
+  }
+  
+  .security-options {
+      flex-direction: column;
+  }
+  
+  .security-options .link-btn {
+      margin-right: 0;
+      text-align: center;
+  }
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Settings</h1>
+      <span>Manage your account and preferences</span>
+    </header>
+
+    <section class="card profile-info">
+      <h2><i class="icon-user"></i> Profile Information</h2>
+      <form>
+        <div class="form-group row">
+          <div class="input-col">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" placeholder="Enter first name">
+          </div>
+          <div class="input-col">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Enter last name">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="your@email.com" value="your@email.com" readonly>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="+91 98765-43210" value="+91 98765-43210">
+        </div>
+
+        <button type="submit" class="btn primary-btn">Save Changes</button>
+      </form>
+    </section>
+
+    <section class="card business-info">
+      <h2><i class="icon-briefcase"></i> Business Information</h2>
+      <form>
+        <div class="form-group">
+          <label for="businessName">Business Name</label>
+          <input type="text" id="businessName" name="businessName" placeholder="Your business name">
+        </div>
+        
+        <div class="form-group">
+          <label for="businessType">Business Type</label>
+          <input type="text" id="businessType" name="businessType" placeholder="E.g. Retail, Wholesale">
+        </div>
+        
+        <div class="form-group">
+          <label for="businessAddress">Business Address</label>
+          <input type="text" id="businessAddress" name="businessAddress" placeholder="Complete address">
+        </div>
+
+        <button type="submit" class="btn secondary-btn">Update Business Info</button>
+      </form>
+    </section>
+
+    <section class="card notifications">
+      <h2><i class="icon-bell"></i> Notifications</h2>
+      
+      <div class="toggle-setting">
+        <div>
+          <label for="emailNotifications">Email Notifications</label>
+          <p>Receive updates about orders and inventory</p>
+        </div>
+        <input type="checkbox" id="emailNotifications" class="switch" checked>
+      </div>
+
+      <div class="toggle-setting">
+        <div>
+          <label for="smsNotifications">SMS Notifications</label>
+          <p>Get SMS alerts for important events</p>
+        </div>
+        <input type="checkbox" id="smsNotifications" class="switch" checked>
+      </div>
+      
+      <div class="toggle-setting">
+        <div>
+          <label for="lowStockAlerts">Low Stock Alerts</label>
+          <p>Alert when inventory falls below threshold</p>
+        </div>
+        <input type="checkbox" id="lowStockAlerts" class="switch" checked>
+      </div>
+    </section>
+
+    <section class="card lang-region">
+      <h2><i class="icon-globe"></i> Language & Region</h2>
+      <div class="form-group">
+        <label for="preferredLanguage">Preferred Language</label>
+        <select id="preferredLanguage" name="preferredLanguage">
+          <option value="english">English</option>
+          <option value="spanish">Spanish</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="currency">Currency</label>
+        <input type="text" id="currency" name="currency" value="₹ INR" readonly>
+      </div>
+    </section>
+
+    <section class="card security">
+      <h2><i class="icon-lock"></i> Security</h2>
+      <div class="security-options">
+        <button class="btn link-btn">Change Password</button>
+        <button class="btn link-btn">Enable Two-Factor Authentication</button>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>

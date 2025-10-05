@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Business Type - Vyapar Saathi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #16a34a;
+            --primary-green-dark: #15803d;
+            --light-green-bg: #f0fdf4;
+            --border-color: #e5e7eb;
+            --text-dark: #1f2937;
+            --text-medium: #4b5563;
+            --text-light: #6b7280;
+            --bg-color: #f9fafb;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 1100px;
+            text-align: center;
+        }
+
+        .header-section h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-section p {
+            font-size: 1.125rem;
+            color: var(--text-medium);
+            margin-bottom: 3rem;
+        }
+
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 5rem;
+        }
+
+        .category-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: left;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07);
+            border-color: var(--primary-green);
+        }
+
+        .card-icon {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            background-color: var(--light-green-bg);
+            color: var(--primary-green);
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-icon svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .category-card h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-card p {
+            color: var(--text-medium);
+            margin-bottom: 2rem;
+            min-height: 40px;
+        }
+
+        .manage-button {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-medium);
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .manage-button:hover {
+            background-color: var(--primary-green);
+            color: white;
+            border-color: var(--primary-green);
+        }
+
+       
+        .ai-features h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .ai-features span {
+            color: var(--primary-green);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            text-align: center;
+        }
+
+        .feature-icon {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+            background-color: var(--light-green-bg);
+            color: var(--primary-green);
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            box-shadow: 0 0 0 8px rgba(22, 163, 74, 0.05);
+        }
+        
+        .feature-icon svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .feature-item h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .feature-item p {
+            color: var(--text-medium);
+            font-size: 0.9rem;
+        }
+        
+        
+        @media (max-width: 992px) {
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem;
+            }
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+             .header-section h1 {
+                font-size: 1.75rem;
+            }
+            .header-section p {
+                font-size: 1rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <main class="main-container">
+        <section class="header-section">
+            <h1>Select Your Business Type</h1>
+            <p>Choose a category to get a dashboard tailored to your needs.</p>
+        </section>
+
+
+        <section class="category-grid">
+            <div class="category-card">
+                <div class="card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 7.5l.415-.207a.75.75 0 011.085.67V10.5m0 0h6m-6 0v-1.5m6 0v1.5m-6 0h6m-6 0a9 9 0 1011.668-5.025 1.5 1.5 0 10-2.223-2.223A9 9 0 008.25 10.5z" /></svg>
+                </div>
+                <h2>Clothing</h2>
+                <p>AI-powered style and size recommendations.</p>
+                <a href="/views/futurepridiction" class="manage-button">Manage Clothing</a>
+            </div>
+            <div class="category-card">
+                <div class="card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 6.087c0-.595-.484-1.08-1.08-1.08H10.83c-.596 0-1.08.485-1.08 1.08v7.833c0 .596.484 1.08 1.08 1.08h2.34c.596 0 1.08-.484 1.08-1.08V6.087z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6.75 6.75 0 000-13.5 6.75 6.75 0 000 13.5z" /></svg>
+                </div>
+                <h2>Jewelry</h2>
+                <p>BIS certified products and QR code verification.</p>
+                <a href="/views/jewelry" class="manage-button">Manage Jewelry</a>
+            </div>
+            <div class="category-card">
+                <div class="card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c.51 0 .962-.328 1.09-.824l1.652-5.498a.75.75 0 00-.73-1.026H5.25" /></svg>
+                </div>
+                <h2>Grocery</h2>
+                <p>Smart expiry date tracking and inventory sync.</p>
+                <a href="/views/expiry" class="manage-button">Manage Grocery</a>
+            </div>
+            <div class="category-card">
+                <div class="card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.362-1.44m0 0a8.048 8.048 0 00-3.362-1.44m3.362 1.44a23.854 23.854 0 00-4.43-1.428m4.43 1.428a23.854 23.854 0 014.43 1.428m0 0a8.287 8.287 0 002.962-2.552 8.25 8.25 0 00-11.963 0A8.287 8.287 0 0012 9.6a8.983 8.983 0 013.362-1.44" /></svg>
+                </div>
+                <h2>Restaurant</h2>
+                <p>Digital menu management and online orders.</p>
+                <a href="#" class="manage-button">Manage Restaurant</a>
+            </div>
+        </section>
+
+        
+        <section class="ai-features">
+            <h2>Powered by <span>Advanced AI</span></h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.898 20.624L16.5 21.75l-.398-1.126a3.375 3.375 0 00-2.456-2.456L12.75 18l1.126-.398a3.375 3.375 0 002.456-2.456L16.5 14.25l.398 1.126a3.375 3.375 0 002.456 2.456L20.25 18l-1.126.398a3.375 3.375 0 00-2.456 2.456z" /></svg>
+                    </div>
+                    <h3>AI Style Advisor</h3>
+                    <p>Skin tone analysis and trend prediction.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    </div>
+                    <h3>BIS Integration</h3>
+                    <p>QR code verification and certification.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" /></svg>
+                    </div>
+                    <h3>Voice Invoices</h3>
+                    <p>Hands-free order and invoice management.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    </div>
+                    <h3>Smart Tracking</h3>
+                    <p>Expiry alerts and intelligent inventory sync.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>

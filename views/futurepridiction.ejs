@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Fashion Trend Forecasting</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .background-pattern { background-color: #f0fdf4; }
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border-left-color: #16a34a;
+            animation: spin 1s ease infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="background-pattern">
+
+    <div class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+        <!-- Back Button -->
+        <div class="mb-8">
+            <a href="/adminhomepage" class="inline-flex items-center text-green-700 hover:text-green-900 group">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 transition-transform group-hover:-translate-x-1"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                Back to Dashboard
+            </a>
+        </div>
+
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-green-800">AI Fashion Trend Forecasting</h1>
+            <p class="mt-3 max-w-3xl mx-auto text-lg text-green-700">
+                Predict what's next in fashion. Our AI analyzes trends from Pinterest, Instagram, and Reddit to give you a competitive edge.
+            </p>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            
+            <!-- Left Panel: Inputs -->
+            <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200/50">
+                <h2 class="text-2xl font-bold text-green-900 mb-6">Generate a New Forecast</h2>
+                <form id="forecast-form" class="space-y-6">
+                    <div>
+                        <label for="category" class="block text-sm font-medium text-gray-700">Clothing Category</label>
+                        <select id="category" name="category" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm">
+                            <option>Sarees</option>
+                            <option selected>Kurtas & Kurtis</option>
+                            <option>Lehengas</option>
+                            <option>Western Wear</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="season" class="block text-sm font-medium text-gray-700">Target Season</label>
+                        <select id="season" name="season" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm">
+                            <option>Upcoming Winter 2025</option>
+                            <option selected>Spring/Summer 2026</option>
+                            <option>Monsoon Festive 2026</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button type="submit" id="generate-btn" class="w-full flex justify-center items-center gap-2 py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+                            Analyze Trends
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Right Panel: Results -->
+            <div id="results-panel" class="bg-white p-8 rounded-xl shadow-lg border border-gray-200/50 min-h-[400px] flex flex-col justify-center items-center">
+                
+                <!-- Initial State / Placeholder -->
+                <div id="results-placeholder" class="text-center text-gray-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-gray-400 mb-4"><path d="M2 17a5 5 0 0 1 5-5h10a5 5 0 0 1 5 5v2a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-2Z"/><path d="M8 12v-2a2 2 0 1 1 4 0v2"/><path d="M12 12v-2a2 2 0 1 1 4 0v2"/></svg>
+                    <p class="font-medium">Your trend report will appear here.</p>
+                    <p class="text-sm">Select a category and season to start.</p>
+                </div>
+
+                <!-- Loading State -->
+                <div id="loading-spinner" class="hidden text-center text-gray-600">
+                    <div class="spinner mx-auto"></div>
+                    <p class="mt-4 font-medium">Analyzing social data...</p>
+                    <p class="text-sm">This may take a moment.</p>
+                </div>
+
+                <!-- Results State -->
+                <div id="results-content" class="hidden w-full">
+                    <div class="text-center mb-6">
+                        <p class="text-sm font-medium text-green-600">PREDICTED TOP TREND</p>
+                        <h3 class="text-3xl font-bold text-gray-800 mt-1">"Linen Blend" Kurtas</h3>
+                    </div>
+
+                    <div class="mb-6">
+                        <label class="text-sm font-medium text-gray-600">Prediction Confidence</label>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5 mt-1">
+                            <div class="bg-green-600 h-2.5 rounded-full" style="width: 85%"></div>
+                        </div>
+                        <p class="text-right text-sm font-bold text-green-700 mt-1">85% (High)</p>
+                    </div>
+
+                    <div class="mb-8">
+                        <h4 class="font-semibold text-gray-800 mb-2">Trend Analysis:</h4>
+                        <p class="text-gray-600 text-sm">Our AI found a 45% increase in "breathable fabrics" and "summer ethnic wear" pins on Pinterest. Instagram influencers in metro cities are favoring minimalist, airy Kurtas. This suggests a strong market demand for comfortable yet stylish linen blends for the upcoming summer season.</p>
+                    </div>
+
+                    <div>
+                        <h4 class="font-semibold text-gray-800 mb-4">Recommended Products to Stock:</h4>
+                        <div class="space-y-4">
+                            <!-- Recommended Product 1 -->
+                            <div class="flex items-center gap-4 bg-green-50/50 p-3 rounded-lg border border-green-200/80">
+                                <img src="https://placehold.co/80x80/a7f3d0/14532d?text=Kurta" alt="Beige Linen Kurta" class="w-20 h-20 rounded-md object-cover flex-shrink-0">
+                                <div>
+                                    <h5 class="font-bold text-gray-800">Beige Linen Blend Kurta</h5>
+                                    <p class="text-xs text-gray-600">Classic straight-cut design. High demand expected for office and casual wear.</p>
+                                </div>
+                            </div>
+                            <!-- Recommended Product 2 -->
+                            <div class="flex items-center gap-4 bg-green-50/50 p-3 rounded-lg border border-green-200/80">
+                                <img src="https://placehold.co/80x80/a7f3d0/14532d?text=Kurti" alt="Pastel Green Short Kurti" class="w-20 h-20 rounded-md object-cover flex-shrink-0">
+                                <div>
+                                    <h5 class="font-bold text-gray-800">Pastel Green Short Kurti</h5>
+                                    <p class="text-xs text-gray-600">Targets the younger demographic. Pairs well with jeans; rising trend on Instagram.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const forecastForm = document.getElementById('forecast-form');
+        const placeholder = document.getElementById('results-placeholder');
+        const spinner = document.getElementById('loading-spinner');
+        const resultsContent = document.getElementById('results-content');
+        const generateBtn = document.getElementById('generate-btn');
+
+        forecastForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // 1. Hide placeholder and show spinner
+            placeholder.classList.add('hidden');
+            resultsContent.classList.add('hidden');
+            spinner.classList.remove('hidden');
+            generateBtn.disabled = true;
+            generateBtn.textContent = 'Analyzing...';
+
+            // 2. Simulate AI analysis (2.5 seconds)
+            setTimeout(() => {
+                // 3. Hide spinner and show results
+                spinner.classList.add('hidden');
+                resultsContent.classList.remove('hidden');
+                generateBtn.disabled = false;
+                generateBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg> Analyze Trends`;
+            }, 2500);
+        });
+    </script>
+
+</body>
+</html>

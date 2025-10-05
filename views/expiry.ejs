@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <title>Inventory Management - Expiry Tracking</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+        --primary-green: #16a34a;
+        --light-green-bg: #f0fdf4;
+        --border-color: #e5e7eb;
+        --text-dark: #1f2937;
+        --text-medium: #4b5563;
+        --warning-yellow-bg: #fefce8;
+        --warning-yellow-text: #a16207;
+        --error-red-bg: #fef2f2;
+        --error-red-text: #b91c1c;
+    }
+    body {
+      background-color: #f9fafb; 
+      font-family: 'Inter', sans-serif;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .hd {
+      display: flex;
+      justify-content: space-between;
+      align-items: center; 
+      margin-bottom: 1.5rem;
+    }
+    .hd h1 { font-size: 2rem; font-weight: 700; color: var(--text-dark); }
+    .hd span { color: var(--text-medium); }
+    .btn {
+      text-decoration: none;
+      color: white;
+      background-color: var(--primary-green); 
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      display: inline-flex; 
+      align-items: center;
+      gap: 0.5rem;
+      transition: background-color 0.2s;
+    }
+    .btn:hover { background-color: #15803d; }
+    
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem; 
+      margin-bottom: 2.5rem;
+    }
+    .box {
+      background-color: white;
+      border: 1px solid var(--border-color);
+      border-radius: 12px; 
+      padding: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .box-content h1 { font-size: 2rem; font-weight: 700; color: var(--text-dark); }
+    .box-content span { font-size: 0.9rem; color: var(--text-medium); font-weight: 500;}
+    .box-icon {
+        font-size: 1.5rem;
+        padding: 0.75rem;
+        border-radius: 8px;
+    }
+    .icon-green { background-color: var(--light-green-bg); color: var(--primary-green); }
+    .icon-yellow { background-color: var(--warning-yellow-bg); color: var(--warning-yellow-text); }
+    .icon-red { background-color: var(--error-red-bg); color: var(--error-red-text); }
+    
+    .inventory-table-container {
+      background-color: white;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      overflow-x: auto;
+    }
+    .inventory-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+    }
+    .inventory-table th,
+    .inventory-table td {
+        padding: 1rem 1.5rem;
+        text-align: left;
+        border-bottom: 1px solid var(--border-color);
+        white-space: nowrap;
+    }
+    .inventory-table th {
+        font-weight: 600;
+        color: var(--text-medium);
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        background-color: #f9fafb;
+    }
+    .inventory-table tr:last-child td { border-bottom: none; }
+    
+    /* --- Styles for Expiry Rows --- */
+    .row-expiring-soon { background-color: var(--warning-yellow-bg); }
+    .row-expired { background-color: var(--error-red-bg); font-weight: 500; }
+    .row-expired td { color: var(--error-red-text); }
+
+  </style>
+</head>
+
+<body>
+    <div class="container">
+      <div class="hd">
+        <div>
+          <h1>Inventory & Expiry Management</h1>
+          <span>Track stock and prevent wastage for your grocery business.</span>
+        </div>
+        <a href="#" class="btn"><span>➕</span> Add New Product</a>
+      </div>
+      
+      <div class="metrics-grid">
+        <div class="box">
+            <div class="box-content">
+                <span>Total Items</span>
+                <h1>5</h1>
+            </div>
+            <div class="box-icon icon-green">📦</div>
+        </div>
+        <div class="box">
+            <div class="box-content">
+                <span>Expiring in 30 Days</span>
+                <h1>1</h1>
+            </div>
+            <div class="box-icon icon-yellow">⏳</div>
+        </div>
+        <div class="box">
+            <div class="box-content">
+                <span>Items Expired</span>
+                <h1>1</h1>
+            </div>
+            <div class="box-icon icon-red">🚫</div>
+        </div>
+      </div>
+      
+      <div class="inventory-table-container">
+        <table class="inventory-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>SKU</th>
+              <th>Quantity</th>
+              <th>Expiry Date</th>
+              <th>Days Left</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="row-expiring-soon"> <td>Cooking Oil (1L)</td>
+              <td>OIL-001</td>
+              <td><strong>8 units</strong></td>
+              <td>2025-10-25</td>
+              <td>20</td>
+              <td>Expiring Soon</td>
+            </tr>
+            <tr class="row-expired"> <td>Spice Mix (250g)</td>
+              <td>SPICE-002</td>
+              <td><strong>15 units</strong></td>
+              <td>2025-09-01</td>
+              <td>Expired</td>
+              <td>Expired</td>
+            </tr>
+            <tr>
+              <td>Organic Rice (5kg)</td>
+              <td>RICE-005</td>
+              <td><strong>23 units</strong></td>
+              <td>2026-08-20</td>
+              <td>319</td>
+              <td>Healthy</td>
+            </tr>
+            <tr>
+              <td>Premium Tea Packets</td>
+              <td>TEA-001</td>
+              <td><strong>45 units</strong></td>
+              <td>2026-12-15</td>
+              <td>436</td>
+              <td>Healthy</td>
+            </tr>
+            <tr>
+              <td>Wheat Flour (10kg)</td>
+              <td>FLOUR-010</td>
+              <td><strong>67 units</strong></td>
+              <td>2027-01-10</td>
+              <td>462</td>
+              <td>Healthy</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div> 
+</body>
+</html>

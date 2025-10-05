@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paisa Hi Paisa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .background-pattern {
+            background-image:
+                radial-gradient(circle at 100% 0%, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0) 20%),
+                radial-gradient(circle at 0% 100%, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0) 20%);
+            background-color: #f0fdf4; 
+        }
+    </style>
+</head>
+<body class="background-pattern">
+
+    <div class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8">
+        <main class="w-full max-w-4xl mx-auto text-center">
+
+            
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-green-800 leading-tight">
+                Welcome to the <br class="hidden sm:block"> MSME Digital Marketplace
+            </h1>
+            <p class="mt-4 max-w-2xl mx-auto text-lg text-green-700">
+                Discover authentic Indian products with AI-powered shopping experiences and certified quality
+            </p>
+
+        
+            <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="/views/home" class="flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition-colors duration-300">
+                    
+                    <svg  xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path  d="M17 19h4"/></svg>
+                  Get Started
+                </a>
+                <a href="#" class="w-full sm:w-auto px-6 py-3 bg-white text-green-800 font-semibold rounded-lg border border-gray-300 hover:bg-gray-100 transition-colors duration-300">
+                    Learn More
+                </a>
+            </div>
+
+            
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200/50">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-full bg-green-100 border border-green-200 mb-4">
+                        
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-700"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-green-900">AI Virtual Try-On</h3>
+                    <p class="mt-2 text-green-700">
+                        Try clothes virtually with personalized recommendations based on your features
+                    </p>
+                </div>
+
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200/50">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-full bg-green-100 border border-green-200 mb-4">
+                        <!-- Diamond Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-700"><path d="M2.7 10.3a2.41 2.41 0 0 0 0 3.41l7.59 7.59a2.41 2.41 0 0 0 3.41 0l7.59-7.59a2.41 2.41 0 0 0 0-3.41l-7.59-7.59a2.41 2.41 0 0 0-3.41 0Z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-green-900">BIS Certified Jewelry</h3>
+                    <p class="mt-2 text-green-700">
+                        Browse authentic jewelry with Bureau of Indian Standards certification
+                    </p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+</body>
+</html>
+

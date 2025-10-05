@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paisa Hi Paisa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #16a34a;
+            --primary-green-dark: #15803d;
+            --light-green-bg: #f0fdf4;
+            --border-color: #e2e8f0;
+            --text-dark: #1f2937;
+            --text-medium: #4b5563;
+            --text-light: #6b7280;
+            --bg-color: #f9fafb;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            padding: 2rem;
+        }
+
+        .invoice-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .invoice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 2rem;
+            background-color: var(--light-green-bg);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-green-dark);
+        }
+        .logo img {
+             width: 40px;
+        }
+        
+        .invoice-title h1 {
+            font-size: 2rem;
+            color: var(--text-dark);
+            text-align: right;
+        }
+        .invoice-title p {
+            color: var(--text-medium);
+            text-align: right;
+        }
+
+        .invoice-details, .invoice-billing {
+            display: flex;
+            justify-content: space-between;
+            padding: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .details-box {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .details-box label {
+            color: var(--text-light);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .details-box input {
+            border: 1px solid var(--border-color);
+            padding: 0.6rem 0.8rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            min-width: 200px;
+        }
+        
+        .bill-to h3 {
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+        .bill-to textarea {
+            width: 100%;
+            min-width: 250px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 0.8rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            resize: vertical;
+        }
+
+        .invoice-items {
+            padding: 0 2rem;
+        }
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .items-table thead {
+            background-color: var(--bg-color);
+        }
+        .items-table th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-medium);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+        }
+        .items-table td {
+            padding: 0.5rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .items-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .items-table input {
+            width: 100%;
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        .item-row input[type="number"] {
+            text-align: right;
+        }
+        .item-row .amount {
+            font-weight: 600;
+            text-align: right;
+            padding-right: 1rem;
+        }
+        .delete-row-btn {
+            background: none;
+            border: none;
+            color: #ef4444;
+            font-size: 1.25rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            line-height: 1;
+        }
+        .delete-row-btn:hover {
+            background-color: #fee2e2;
+        }
+
+        .add-item-btn {
+            background: none;
+            border: none;
+            color: var(--primary-green);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 1rem;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .invoice-summary {
+            padding: 2rem;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .summary-table {
+            width: 100%;
+            max-width: 300px;
+        }
+        .summary-table td {
+            padding: 0.75rem 1rem;
+            color: var(--text-medium);
+        }
+        .summary-table td:last-child {
+            text-align: right;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        .summary-table tr.grand-total td {
+            font-size: 1.25rem;
+            color: var(--text-dark);
+            border-top: 2px solid var(--text-dark);
+        }
+
+        .invoice-footer {
+            padding: 2rem;
+            background-color: var(--bg-color);
+            border-top: 1px solid var(--border-color);
+        }
+        .footer-notes h4 {
+            margin-bottom: 0.5rem;
+        }
+        .footer-notes textarea {
+            width: 100%;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 0.8rem;
+            font-size: 0.9rem;
+        }
+        .footer-actions {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+        .action-btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .primary-btn {
+            background-color: var(--primary-green);
+            color: white;
+        }
+        .primary-btn:hover {
+            background-color: var(--primary-green-dark);
+        }
+        .secondary-btn {
+            background-color: #e5e7eb;
+            color: var(--text-dark);
+        }
+        .secondary-btn:hover {
+            background-color: #d1d5db;
+        }
+        
+        @media (max-width: 768px) {
+            body { padding: 1rem; }
+            .invoice-header, .invoice-details, .invoice-billing, .invoice-summary, .invoice-footer { padding: 1.5rem; }
+            .invoice-header, .details-box { flex-direction: column; gap: 1.5rem; }
+            .invoice-title h1, .invoice-title p { text-align: left; }
+            .details-box { width: 100%; }
+            th:nth-child(1), td:nth-child(1) { width: 40%; }
+            th:nth-child(2), td:nth-child(2) { width: 15%; }
+            th:nth-child(3), td:nth-child(3) { width: 20%; }
+            .footer-actions { flex-direction: column; }
+            .action-btn { width: 100%; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="invoice-container">
+      
+        <header class="invoice-header">
+            <div class="logo">
+                <img src="https://play-lh.googleusercontent.com/mubYr6xPiye1DRllAudtdEpgMf1gY8REwvONpbVXSaTEia-JvnOUOGzF33iVEs3_-XAn" alt="Vyapar Saathi Logo">
+                <span>Paisa Hi Paisa</span>
+            </div>
+            <div class="invoice-title">
+                <h1>INVOICE</h1>
+                <p>#<input type="text" id="invoice-number" value="INV-001" style="width:100px; border:none; background: transparent; text-align:right; font-size:1rem;"></p>
+            </div>
+        </header>
+
+     
+        <section class="invoice-billing">
+            <div class="details-box">
+                <label for="invoice-date">Date</label>
+                <input type="date" id="invoice-date">
+                <label for="due-date">Due Date</label>
+                <input type="date" id="due-date">
+            </div>
+            <div class="bill-to">
+                <h3>Bill To:</h3>
+                <textarea id="customer-info" rows="4" placeholder="Customer Name&#10;Customer Address&#10;City, State, ZIP&#10;customer@email.com"></textarea>
+            </div>
+        </section>
+
+      
+        <section class="invoice-items">
+            <table class="items-table">
+                <thead>
+                    <tr>
+                        <th style="width: 45%;">Item Description</th>
+                        <th style="width: 15%; text-align: center;">Qty</th>
+                        <th style="width: 20%; text-align: right;">Rate</th>
+                        <th style="width: 20%; text-align: right;">Amount</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <body id="items-body">
+                    <tr class="item-row">
+                        <td><input type="text" class="item-desc" placeholder="Enter item name or description"></td>
+                        <td><input type="number" class="item-qty" value="1" min="0"></td>
+                        <td><input type="number" class="item-rate" value="0.00" min="0" step="0.01"></td>
+                        <td class="amount">₹0.00</td>
+                        <td><button class="delete-row-btn" title="Remove Item">&times;</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button id="add-item-btn" class="add-item-btn">+ Add New Item</button>
+        </section>
+
+ 
+        <section class="invoice-summary">
+            <table class="summary-table">
+                <tbody>
+                    <tr>
+                        <td>Subtotal</td>
+                        <td id="subtotal">₹0.00</td>
+                    </tr>
+                    <tr>
+                        <td>Tax (GST 18%)</td>
+                        <td id="tax">₹0.00</td>
+                    </tr>
+                    <tr class="grand-total">
+                        <td>Total</td>
+                        <td id="grand-total">₹0.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+ 
+        <footer class="invoice-footer">
+            <div class="footer-notes">
+                <h4>Notes</h4>
+                <textarea rows="3" placeholder="Payment terms, thank you message, etc."></textarea>
+            </div>
+            <div class="footer-actions">
+                <button class="action-btn secondary-btn">Save as Draft</button>
+                <button class="action-btn primary-btn">Generate & Send Invoice</button>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const itemsBody = document.getElementById('items-body');
+            const addItemBtn = document.getElementById('add-item-btn');
+            const subtotalEl = document.getElementById('subtotal');
+            const taxEl = document.getElementById('tax');
+            const grandTotalEl = document.getElementById('grand-total');
+
+           
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('invoice-date').value = today;
+
+            function createNewRow() {
+                const row = document.createElement('tr');
+                row.classList.add('item-row');
+                row.innerHTML = `
+                    <td><input type="text" class="item-desc" placeholder="Enter item name or description"></td>
+                    <td><input type="number" class="item-qty" value="1" min="0"></td>
+                    <td><input type="number" class="item-rate" value="0.00" min="0" step="0.01"></td>
+                    <td class="amount">₹0.00</td>
+                    <td><button class="delete-row-btn" title="Remove Item">&times;</button></td>
+                `;
+                return row;
+            }
+
+            function updateTotals() {
+                let subtotal = 0;
+                const rows = itemsBody.querySelectorAll('.item-row');
+                
+                rows.forEach(row => {
+                    const qty = parseFloat(row.querySelector('.item-qty').value) || 0;
+                    const rate = parseFloat(row.querySelector('.item-rate').value) || 0;
+                    const amount = qty * rate;
+                    row.querySelector('.amount').textContent = `₹${amount.toFixed(2)}`;
+                    subtotal += amount;
+                });
+
+                const tax = subtotal * 0.18; 
+                const grandTotal = subtotal + tax;
+
+                subtotalEl.textContent = `₹${subtotal.toFixed(2)}`;
+                taxEl.textContent = `₹${tax.toFixed(2)}`;
+                grandTotalEl.textContent = `₹${grandTotal.toFixed(2)}`;
+            }
+
+            addItemBtn.addEventListener('click', () => {
+                itemsBody.appendChild(createNewRow());
+            });
+
+            itemsBody.addEventListener('click', (e) => {
+                if (e.target.classList.contains('delete-row-btn')) {
+                    if (itemsBody.querySelectorAll('.item-row').length > 1) {
+                        e.target.closest('.item-row').remove();
+                        updateTotals();
+                    } else {
+                        alert("You must have at least one item.");
+                    }
+                }
+            });
+
+            itemsBody.addEventListener('input', (e) => {
+                if (e.target.classList.contains('item-qty') || e.target.classList.contains('item-rate')) {
+                    updateTotals();
+                }
+            });
+
+           
+            updateTotals();
+        });
+    </script>
+
+</body>
+</html>
